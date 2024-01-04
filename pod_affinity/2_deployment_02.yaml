@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: demo-pod-aff-redis
-  name: demo-pod-aff-redisf
+  name: demo-pod-aff-redis
 spec:
   replicas: 1
   selector:
