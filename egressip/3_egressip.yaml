@@ -1,0 +1,10 @@
+apiVersion: k8s.ovn.org/v1
+kind: EgressIP
+metadata:
+  name: demo-app
+spec:
+  egressIPs:
+  - 192.168.3.169
+  namespaceSelector:
+    matchLabels:
+      kubernetes.io/metadata.name: demo-app
