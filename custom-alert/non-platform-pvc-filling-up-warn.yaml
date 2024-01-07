@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: DemoPvcFillingUp
+  namespace: openshift-monitoring
+spec:
+  groups:
+  - name: userdefine
+    rules:
+    - alert: HighPvcUsage
+      expr: kubelet_volume_stats_available_bytes{namespace="demo-pvc"} / kubelet_volume_stats_capacity_bytes < 0.3
+      labels:
+        severity: warning
