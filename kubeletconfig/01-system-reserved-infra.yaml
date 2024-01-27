@@ -1,0 +1,13 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: KubeletConfig
+metadata:
+  name: kubellet-allocate-zz-infra
+spec:
+  kubeletConfig:
+    systemReserved:
+      cpu: 500m
+      memory: 0.5Gi
+  machineConfigPoolSelector:
+    matchLabels:
+      custom-kubelet: zz-infra
+ 
