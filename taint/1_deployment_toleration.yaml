@@ -3,30 +3,25 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: demo-topology-anti-pod
-  name: demo-topology-anti-pod
+    app: demo-toleration-yellow
+  name: demo-toleration-yellow
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: demo-topology-anti-pod
+      app: demo-toleration-yellow
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: demo-topology-anti-pod
+        app: demo-toleration-yellow
     spec:
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - demo-topology-anti-pod
-            topologyKey: kubernetes.io/hostname
+      tolerations:
+      - key: application
+        value: yellow
+        effect: NoSchedule
+        operator: Equal
       containers:
       - image: quay.io/rh_ee_swongpai/py-http-call:52f987b597c5e2425cad791d32060cbdf8091150
         name: py-http-call
