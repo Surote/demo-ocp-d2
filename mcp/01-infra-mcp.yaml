@@ -1,7 +1,7 @@
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfigPool
 metadata:
-  name: infra-node-odf
+  name: infra
 spec:
   machineConfigSelector:
     matchExpressions:
@@ -9,5 +9,5 @@ spec:
   maxUnavailable: null
   nodeSelector:
     matchLabels:
-      node-role.kubernetes.io/infra-odf: ""
+      node-role.kubernetes.io/infra: ""
   paused: false
