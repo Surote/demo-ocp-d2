@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1beta1
+kind: AlertmanagerConfig
+metadata:
+  generation: 1
+  name: user-alertmanagerconfig
+  namespace: test-alert
+spec:
+  receivers:
+  - name: default
+    slackConfigs:
+    - apiURL:
+        key: url
+        name: my-slack-secret
+      channel: ais-demo-alert-user
+  route:
+    groupBy:
+    - namespace
+    receiver: default

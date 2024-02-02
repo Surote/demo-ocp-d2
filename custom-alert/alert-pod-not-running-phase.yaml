@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: userdefinealert
+  namespace: test-alert
+spec:
+  groups:
+  - name: userdefine
+    rules:
+    - alert: ApplicationPodNotRunning
+      expr: sum(kube_pod_status_phase{namespace=~".*",phase!~'Running|Succeeded'}) > 0
+      labels:
+        severity: warning
+      annotations:
+        description: investigate more with "oc get pod -A | grep -v 'Running\|Completed'". Created by USER

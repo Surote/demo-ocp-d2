@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: demo-not-ready
+  name: demo-not-ready
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-not-ready
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: demo-not-ready
+    spec:
+      containers:
+      - image: quay.io/rh_ee_swongpai/py-http-call:52f987b597c5e2425cad791d32060cbdf8091150
+        name: py-http-call
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop:
+            - ALL
+        resources: {}
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 10
+status: {}

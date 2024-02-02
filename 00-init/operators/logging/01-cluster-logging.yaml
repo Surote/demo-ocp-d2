@@ -24,7 +24,7 @@ spec:
         requests:
           memory: 16Gi
       storage:
-        size: 50Gi
+        size: 150Gi
         storageClassName: thin-csi
     retentionPolicy:
       application:

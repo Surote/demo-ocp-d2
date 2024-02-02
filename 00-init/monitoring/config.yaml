@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-monitoring-config
+  namespace: openshift-monitoring
+data:
+  config.yaml: |
+    enableUserWorkload: true
+    alertmanagerMain:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ''
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/infra
+        operator: Exists
+      volumeClaimTemplate:
+        metadata:
+          name: alertmanager-main-db
+        spec:
+          storageClassName: thin-csi
+          resources:
+            requests:
+              storage: 2Gi
+    prometheusOperator:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ''
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/infra
+        operator: Exists
+    prometheusK8s:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ''
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/infra
+        operator: Exists
+      volumeClaimTemplate:
+        metadata:
+          name: prom-main-db
+        spec:
+          storageClassName: thin-csi
+          resources:
+            requests:
+              storage: 20Gi
+      retention: 24h
+    thanosQuerier:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ''
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/infra
+        operator: Exists
+    telemeterClient:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ''
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/infra
+        operator: Exists
+    openshiftStateMetrics:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ''
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/infra
+        operator: Exists
+    kubeStateMetrics:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ''
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/infra
+        operator: Exists
+    k8sPrometheusAdapter:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ''
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/infra
+        operator: Exists

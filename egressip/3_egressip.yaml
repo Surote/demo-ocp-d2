@@ -1,10 +1,14 @@
 apiVersion: k8s.ovn.org/v1
 kind: EgressIP
 metadata:
-  name: demo-app
+  name: demo-app-test-alert
 spec:
   egressIPs:
-  - 192.168.3.169
+  - 192.168.162.155
   namespaceSelector:
-    matchLabels:
-      kubernetes.io/metadata.name: demo-app
+    matchExpressions:
+    - key: kubernetes.io/metadata.name
+      operator: In
+      values:
+      - test-alert
+      - test-alert-2
