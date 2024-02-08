@@ -12,3 +12,4 @@ spec:
       values:
       - test-alert
       - test-alert-2
+      - test-application
