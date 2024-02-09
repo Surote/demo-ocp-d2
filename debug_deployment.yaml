@@ -18,16 +18,8 @@ spec:
         app: debug-toolbox
     spec:
       containers:
-      - image: registry.access.redhat.com/ubi8/toolbox:8.9-8
+      - image: registry.redhat.io/rhel7/rhel-tools
         command: ["sleep", "2d"]
         name: debug-toolbox
-        securityContext:
-          seccompProfile:
-            type: RuntimeDefault
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          capabilities:
-            drop:
-            - ALL
         resources: {}
 status: {}
